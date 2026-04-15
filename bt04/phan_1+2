@@ -1,0 +1,26 @@
+Phần 1 – Phân tích & Đề xuất
+ Input / Output
+Input: username, password, confirmPassword
+Output:
+ - Hợp lệ => đăng ký thành công
+ - Không hợp lệ => báo lỗi "Mật khẩu không khớp"
+
+Giải pháp 1 – if-else trong Controller
+if (!password.equals(confirmPassword)) {
+    return "error";
+}
+
+Giải pháp 2 – Custom Validation (Class-level)
+Tạo annotation:
+
+@PasswordMatch
+
+Gắn lên class DTO để kiểm tra 2 field cùng lúc
+
+PHẦN 2 – So sánh & Lựa chọn
+
+Tiêu chí	            Giải pháp 1 (if-else)	         Giải pháp 2 (Custom Annotation)
+Code rườm rà	            nhiều	                          gọn
+Tái sử dụng	                kém	                              cao
+Separation of Concerns	    vi phạm	                          đúng chuẩn
+Clean Code	                không tốt	                      tốt
