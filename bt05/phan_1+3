@@ -1,0 +1,54 @@
+1. Thiết kế Kiến trúc & Logic
+Mapping quy tắc => Annotation
+Nghiệp vụ	                         Giải pháp
+tourCode đúng format	          @Pattern (built-in)
+adultPrice > 0	                  @Positive
+childPrice > 0	                  @Positive
+childPrice ≤ adultPrice	          Custom Class-level
+startDate ≥ hôm nay	              Custom Field-level
+endDate > startDate	              Custom Class-level
+
+Flow dữ liệu
+
+User nhập form => Submit
+=> Controller (@Valid)
+=> Bean Validation chạy
+   => Field-level check
+   => Class-level check
+=> Nếu lỗi:
+   => BindingResult.hasErrors()
+   => return lại form (giữ dữ liệu)
+=> Thymeleaf hiển thị lỗi đỏ
+=> Nếu OK => lưu DB
+
+3. Kịch bản Test rủi ro:
+
+-Case 1
+tourCode = ABC_123
+
+ + Sai format
+=> bị chặn bởi @Pattern
+
+-Case 2
+adultPrice = 100000
+childPrice = 200000
+
+ + trẻ em > người lớn
+=> bị chặn bởi @ValidPrice
+
+-Case 3
+startDate = 2020-01-01
+endDate = 2019-01-01
+
+ + ngày sai logic
+=> bị chặn bởi @ValidDate
+
+lý do không bị crash ?
+- Có @Valid => bật validation
+- Có BindingResult => bắt lỗi
+- Validator check null => tránh NullPointerException
+
+Tổng kết
+Field-level => kiểm tra 1 field
+Class-level => kiểm tra logic nhiều field
+BindingResult => chống 400 / 500
