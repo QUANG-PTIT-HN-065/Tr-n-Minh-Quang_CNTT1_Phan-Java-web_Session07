@@ -1,0 +1,2 @@
+BindingResult không đặt ngay sau tham số có @Valid nên Spring không bắt lỗi
+ => ném MethodArgumentNotValidException => HTTP 400.
