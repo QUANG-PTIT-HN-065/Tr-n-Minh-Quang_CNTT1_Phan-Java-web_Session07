@@ -1,0 +1,19 @@
+Input / Output
+Input: withdrawAmount (Long)
+Output:
+ - Hợp lệ => cho phép rút tiền
+ - Không hợp lệ => trả lỗi validation
+Giải pháp
+ -Dùng Custom Annotation
+
+Pseudocode Validator
+IF value == null
+    return true (để @NotNull xử lý riêng)
+
+IF value < 50000
+    return false
+
+IF value % 10000 != 0
+    return false
+
+RETURN true
