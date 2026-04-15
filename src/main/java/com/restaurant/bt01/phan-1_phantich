@@ -1,0 +1,18 @@
+Lỗi 1: Lọt khoảng trắng vào Database
+@NotNull
+Nhưng @NotNull chỉ kiểm tra:
+khác null (!= null)
+
+=>Không kiểm tra:
+chuỗi rỗng ""
+chuỗi toàn khoảng trắng " "
+
+Lỗi 2: Không chặn được request từ Postman → lỗi 500
+Thiếu:
+@Valid
+
+Kết quả:
+
+Spring KHÔNG validate DTO
+Dữ liệu bẩn đi thẳng vào logic
+Có thể gây lỗi trong DB/service => 500 Internal Server Error
